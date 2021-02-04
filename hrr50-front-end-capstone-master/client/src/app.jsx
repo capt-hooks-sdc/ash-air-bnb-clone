@@ -1,9 +1,3 @@
-/* eslint-disable react/button-has-type */
-/* eslint-disable no-plusplus */
-/* eslint-disable react/destructuring-assignment */
-/* eslint-disable no-undef */
-/* eslint-disable jsx-a11y/alt-text */
-
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';

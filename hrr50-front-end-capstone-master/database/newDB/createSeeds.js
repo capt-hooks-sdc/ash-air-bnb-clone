@@ -5,7 +5,7 @@ const writeProperties = fs.createWriteStream(`${__dirname}/seeds/properties.csv`
 writeProperties.write('name,city,region,country\n', 'utf8');
 
 const writeManyProperties = (writer, encoding, callback = () => writeProperties.end()) => {
-  let i = 10000;
+  let i = 10000000;
   const write = () => {
     let ok = true;
     while (i > 0 && ok) {
@@ -32,7 +32,7 @@ const writePhotos = fs.createWriteStream(`${__dirname}/seeds/photos.csv`);
 writePhotos.write('propertyId,url,caption\n');
 
 const writeManyPhotos = (writer, encoding, callback = () => writeProperties.end()) => {
-  let i = 10000;
+  let i = 10000000;
   let perProp = faker.random.number({min: 6, max: 10});
   const write = () => {
     let ok = true;
@@ -63,7 +63,7 @@ const writeReviews = fs.createWriteStream(`${__dirname}/seeds/reviews.csv`);
 writeReviews.write('propertyId,stars\n');
 
 const writeManyReviews = (writer, encoding, callback = () => writeProperties.end()) => {
-  let i = 10000;
+  let i = 10000000;
   let perProp = faker.random.number({min: 5, max: 15});
   const write = () => {
     let ok = true;

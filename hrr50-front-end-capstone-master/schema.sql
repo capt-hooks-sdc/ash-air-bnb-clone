@@ -1,21 +1,25 @@
-DROP DATABASE IF EXISTS PhotoGallery;
-CREATE DATABASE PhotoGallery;
+DROP DATABASE IF EXISTS sdc;
+CREATE DATABASE sdc;
 
-USE PhotoGallery;
+\c sdc;
 
-
-CREATE TABLE `Property` (
-  `id` INTEGER AUTO_INCREMENT,
-  `name` CHAR(255) NULL DEFAULT NULL,
-  `location` CHAR(255) NULL DEFAULT NULL,
-  `favorites` INTEGER NOT NULL,
-  PRIMARY KEY (`id`)
+CREATE TABLE properties (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR NOT NULL,
+  city VARCHAR NOT NULL,
+  region VARCHAR NOT NULL,
+  country VARCHAR NOT NULL
 );
 
+CREATE TABLE photos (
+  id SERIAL PRIMARY KEY,
+  propertyId INT REFERENCES properties (id),
+  url VARCHAR NOT NULL,
+  caption VARCHAR
+);
 
-CREATE TABLE `Photos` (
-  `id` INTEGER AUTO_INCREMENT,
-  `photoUrl` CHAR(255) NULL DEFAULT NULL,
-  `propertyID` INT,
-  PRIMARY KEY (`id`)
+CREATE TABLE reviews (
+  id SERIAL PRIMARY KEY,
+  propertyId INT REFERENCES properties (id),
+  stars INT NOT NULL
 );

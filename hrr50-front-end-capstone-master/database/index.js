@@ -1,40 +1,20 @@
-const mysql = require('mysql');
+const pgp = require('pg-promise')();
 
-const con = mysql.createConnection({
-  host: 'localhost',
-  user: 'student',
-  password: 'student',
-  database: 'PhotoGallery',
-});
+const PG_HOST = process.env.PG_HOST || 'localhost';
+const PG_PORT = process.env.PG_PORT || 5432;
+const PG_DB = process.env.PG_DB || 'sdc';
 
-con.connect((err) => {
-  if (err) {
-    console.log(err);
-  } else {
-    console.log('connected to the database');
-  }
-});
+const connectionString = `postgres://${PG_HOST}:${PG_PORT}/${PG_DB}`;
+const db = pgp(connectionString);
 
-const addProperties = (name, location, favorites, callback) => {
-  con.query(
-    'INSERT INTO Property (name, location, favorites) VALUES (?, ?, ?)', [name, location, favorites], callback
-  );
-};
-
-const addPhotos = (photoURL, id, callback) => {
-  con.query(
-    'INSERT INTO Photos (photoUrl, propertyID) VALUES (?, ?)', [photoURL, id], callback
-  );
-};
-
-const retrieveOneProperty = (index, callback) => {
-  con.query(
-    `select Property.name, Property.location, Property.favorites, photoURL from Property join Photos on Property.id = Photos.propertyID where Property.id = ${index}`, callback
-  );
+const retrieveOneProperty = (id, cb) => {
+  const queryString = `SELECT name, city, region, country, ph.url, ph.caption FROM properties pr INNER JOIN photos ph ON ph.propertyId = pr.id WHERE pr.id = ${id}`;
+  db.query(queryString)
+    .then(data => cb(null, data))
+    .catch(err => cb(err));
 };
 
 module.exports = {
-  addPhotos,
-  addProperties,
-  retrieveOneProperty,
+  db: db,
+  retrieveOneProperty: retrieveOneProperty
 };

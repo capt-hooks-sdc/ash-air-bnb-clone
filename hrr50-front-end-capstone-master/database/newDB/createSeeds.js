@@ -13,7 +13,7 @@ const writeManyProperties = (writer, encoding, callback = () => writeProperties.
       const name = faker.address.county() + ' ' + faker.address.streetSuffix();
       const city = faker.address.city();
       const region = faker.address.state();
-      const country = faker.address.country();
+      const country = faker.address.country().replace(/,/g, '');
       const data = `${name},${city},${region},${country}\n`;
       if (i === 0) {
         writer.write(data, encoding, callback);

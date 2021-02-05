@@ -1,23 +1,18 @@
 const express = require('express');
 const path = require('path');
-const cors = require('cors');
 const compression = require('compression');
 const { retrieveOneProperty } = require('../database/index.js');
 
-const port = 3000;
+const port = process.env.PORT || 3000;
 const app = express();
 
 app.use(compression());
 app.use('/', express.static(path.join(__dirname, '..', 'public')));
-app.use(cors({ origin: 'http://54.157.193.11:8000/' }));
 app.use('/bundle', express.static(path.join(__dirname, '..', 'public/app.js')));
 
-app.get('/', cors(), (req, res) => {
-  res.send('Hello from the server!');
-});
-
-app.get('/photos', cors(), (req, res) => {
-  retrieveOneProperty(1, (err, results) => {
+app.get('/photos', (req, res) => {
+  var property = req.query.property || 1;
+  retrieveOneProperty(property, (err, results) => {
     if (err) {
       res.send(err);
     } else {

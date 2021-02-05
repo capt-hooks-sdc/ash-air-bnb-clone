@@ -4,4 +4,4 @@ node_modules
 
 public/app.js
 
-database/newDB/seeds
+database/seeds

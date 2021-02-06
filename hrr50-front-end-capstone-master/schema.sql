@@ -23,3 +23,6 @@ CREATE TABLE reviews (
   propertyId INT REFERENCES properties (id),
   stars INT NOT NULL
 );
+
+CREATE INDEX ON photos (propertyId);
+CREATE INDEX ON reviews (propertyId);

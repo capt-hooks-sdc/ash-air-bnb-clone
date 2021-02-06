@@ -8,7 +8,7 @@ const connectionString = `postgres://${PG_HOST}:${PG_PORT}/${PG_DB}`;
 const db = pgp(connectionString);
 
 const retrieveOneProperty = (id, cb) => {
-  const queryString = `SELECT name, city, region, country, ph.url, ph.caption FROM properties pr INNER JOIN photos ph ON ph.propertyId = pr.id WHERE pr.id = ${id}`;
+  const queryString = `SELECT name, city, region, country, ph.url, ph.caption, r.stars FROM properties pr INNER JOIN photos ph ON ph.propertyId = pr.id INNER JOIN reviews r ON r.propertyId = pr.id WHERE pr.id = ${id}`;
   db.query(queryString)
     .then(data => cb(null, data))
     .catch(err => cb(err));

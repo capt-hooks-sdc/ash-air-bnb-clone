@@ -12,7 +12,9 @@
     "build-dev": "webpack -w",
     "makeSeeds": "node database/createSeeds.js",
     "seed": "node database/seed.js",
-    "test": "mocha --recursive --exit"
+    "test": "mocha --recursive --exit",
+    "test-db-group": "node database/tests/groupedQuery.test.js",
+    "test-db-split": "node database/tests/splitQuery.test.js"
   },
   "dependencies": {
     "@babel/cli": "^7.12.10",

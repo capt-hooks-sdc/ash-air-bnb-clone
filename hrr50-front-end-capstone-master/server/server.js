@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const compression = require('compression');
-const { retrieveOneProperty, retrievePropertySplit } = require('../database/index.js');
+const { retrievePropertySplit } = require('../database/index.js');
 
 const port = process.env.PORT || 3000;
 const app = express();
@@ -11,16 +11,6 @@ app.use('/', express.static(path.join(__dirname, '..', 'public')));
 app.use('/bundle', express.static(path.join(__dirname, '..', 'public/app.js')));
 
 app.get('/photos', (req, res) => {
-  var property = req.query.property || 1;
-  retrieveOneProperty(property, (err, results) => {
-    if (err) {
-      res.send(err);
-    } else {
-      res.send(results);
-    }
-  });
-});
-app.get('/photos2', (req, res) => {
   var property = req.query.property || 1;
   retrievePropertySplit(property, (err, results) => {
     if (err) {

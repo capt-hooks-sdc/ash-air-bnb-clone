@@ -5,3 +5,8 @@ node_modules
 public/app.js
 
 database/seeds
+
+newrelic.js
+newrelic_agent.log
+
+.DS_Store

@@ -1,4 +1,5 @@
 const pgp = require('pg-promise')();
+require('dotenv');
 
 const PG_HOST = process.env.PG_HOST || 'localhost';
 const PG_PORT = process.env.PG_PORT || 5432;

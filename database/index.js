@@ -4,8 +4,10 @@ require('dotenv').config();
 const PG_HOST = process.env.PG_HOST || 'localhost';
 const PG_PORT = process.env.PG_PORT || 5432;
 const PG_DB = process.env.PG_DB || 'sdc';
+const PG_USER = process.env.PG_USER || 'postgres';
+const PG_PWD = process.env.PG_PWD || '';
 
-const connectionString = `postgres://${PG_HOST}:${PG_PORT}/${PG_DB}`;
+const connectionString = `postgres://${PG_USER}:${PG_PWD}@${PG_HOST}:${PG_PORT}/${PG_DB}`;
 const db = pgp(connectionString);
 
 const retrieveOneProperty = (id, cb) => {
